@@ -23,18 +23,31 @@ import {
   Zipcode,
   ZipcodeWrapper
 } from "../../../styles/boardsNew";
+import { gql, useMutation } from "@apollo/client";
+
+const graphqlSetting = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!){
+    createBoard(createBoardInput: $createBoardInput){
+      _id
+      writer
+      contents
+    }
+  }
+`;
 
 export default function Board() {
+
+  const [createBoard] = useMutation(graphqlSetting);
 
   const [writer, setWriter] = useState('');
   const [password, setPassword] = useState('');
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [contents, setContents] = useState('');
 
   const [writerError, setWriterError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [titleError, setTitleError] = useState('');
-  const [contentError, setContentError] = useState('');
+  const [contentsError, setContentsError] = useState('');
 
   function onChangeWriter(e) {
     setWriter(e.target.value);
@@ -51,11 +64,11 @@ export default function Board() {
     setTitleError('')
   }
   function onChangeContent(e) {
-    setContent(e.target.value);
-    setContentError('')
+    setContents(e.target.value);
+    setContentsError('')
   }
 
-  const onClick = () => {
+  const onClick = async () => {
     if(!writer) {
       setWriterError('작성자를 입력해주세요')
     }
@@ -65,11 +78,22 @@ export default function Board() {
     if(!title){
       setTitleError('제목을 입력해주세요')
     }
-    if(!content){
-      setContentError('내용을 입력해주세요')
+    if(!contents){
+      setContentsError('내용을 입력해주세요')
     }
-    if(writer && title && password && content) {
-      alert('게시글이 등록되었습니다.')
+    if(writer && title && password && contents) {
+      alert('게시글이 등록되었습니다.');
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer,
+            title,
+            password,
+            contents,
+          }
+        }
+      });
+      console.log(result)
     }
   }
 
@@ -97,7 +121,7 @@ export default function Board() {
       <InputWrapper>
         <Label>내용</Label>
         <Contents placeholder="내용을 작성해주세요." onChange={onChangeContent}/>
-        <ErrorMsg>{contentError}</ErrorMsg>
+        <ErrorMsg>{contentsError}</ErrorMsg>
       </InputWrapper>
       <InputWrapper>
         <Label>주소</Label>
