@@ -19,24 +19,43 @@ export default function BoardWrite(){
   const [passwordError, setPasswordError] = useState('');
   const [titleError, setTitleError] = useState('');
   const [contentsError, setContentsError] = useState('');
+  const [isActive, setIsActive] = useState(false);
 
   function onChangeWriter(e) {
     setWriter(e.target.value);
-    if(e.target.value !== '') {
-      setWriterError('')
+    setWriterError('')
+    if(e.target.value && password && title && contents) {
+      setIsActive(true)
+    } else {
+      setIsActive(false)
     }
   }
   function onChangePassword(e) {
     setPassword(e.target.value);
     setPasswordError('')
+    if(writer && e.target.value && title && contents) {
+      setIsActive(true)
+    } else {
+      setIsActive(false)
+    }
   }
   function onChangeTitle(e) {
     setTitle(e.target.value);
     setTitleError('')
+    if(writer && password && e.target.value && contents) {
+      setIsActive(true)
+    } else {
+      setIsActive(false)
+    }
   }
   function onChangeContent(e) {
     setContents(e.target.value);
     setContentsError('')
+    if(writer && password && title && e.target.value) {
+      setIsActive(true)
+    } else {
+      setIsActive(false)
+    }
   }
 
   const onClick = async () => {
@@ -84,6 +103,7 @@ export default function BoardWrite(){
       passwordError={passwordError}
       titleError={titleError}
       contentsError={contentsError}
+      isActive={isActive}
     ></BoardWriterUI>
   )
 }
