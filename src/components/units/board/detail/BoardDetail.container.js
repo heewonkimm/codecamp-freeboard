@@ -16,19 +16,33 @@ export default function BoardDetail() {
     }
   });
 
+  const onClickList = () => {
+    router.push(`/boards`)
+  }
+
   const onClickDelete = (e) => {
-    deleteBoard({
-      variables: { boardId: e.target.id },
-      refetchQueries: [{query: FETCH_BOARD}]
-    })
-    // console.log(e.target.id)
-    // 삭제하기 그래프큐엘 안됨
+    const deleteConfirm = confirm('정말 삭제하시겠습니까?');
+    if(deleteConfirm) {
+      deleteBoard({
+        variables: { boardId: e.target.id },
+        refetchQueries: [{query: FETCH_BOARD}]
+      })
+      router.push(`/boards`)
+    } else {
+      return
+    }
+  }
+  
+  const onClickMoveEdit = () => {
+    router.push(`/boards/detail/${router.query.num}/edit`)
   }
 
   return(
     <BoardDetailUI 
     data={data}
     onClickDelete={onClickDelete}
+    onClickList={onClickList}
+    onClickMoveEdit={onClickMoveEdit}
     ></BoardDetailUI>
   )
 }

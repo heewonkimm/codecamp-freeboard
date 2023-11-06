@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardWriterUI from "./BoardWrite.presenter";
-import { graphqlSetting } from "./BoardWrite.queries";
+import { UPDATE_BOARD, graphqlSetting } from "./BoardWrite.queries";
 
 
-export default function BoardWrite(){
+export default function BoardWrite(props){
 
   const router = useRouter();
   const [createBoard] = useMutation(graphqlSetting);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const [writer, setWriter] = useState('');
   const [password, setPassword] = useState('');
@@ -91,6 +92,40 @@ export default function BoardWrite(){
       }
     }
   }
+  const onClickUpdate = async () => {
+    // if(!writer) {
+    //   setWriterError('작성자를 입력해주세요')
+    // }
+    // if(!password){
+    //   setPasswordError('패스워드를 입력해주세요')
+    // }
+    // if(!title){
+    //   setTitleError('제목을 입력해주세요')
+    // }
+    // if(!contents){
+    //   setContentsError('내용을 입력해주세요')
+    // }
+
+    if(writer && title && password && contents) {
+      alert('게시글이 수정되었습니다.');
+      try {
+        const myVariables = {}
+        if(title) myVariables.title = title
+        if(contents) myVariables.contents = contents
+        const result = await updateBoard({
+          variables: {
+            boardId: router.query.num,
+            password: password,
+            updateBoardInput: myVariables
+          }
+        });
+        console.log(result)
+        router.push(`/boards/detail/${result.data.updateBoard._id}`)
+      } catch(error) {
+        alert(error.message)
+      }
+    }
+  }
 
   return(
     <BoardWriterUI
@@ -104,6 +139,9 @@ export default function BoardWrite(){
       titleError={titleError}
       contentsError={contentsError}
       isActive={isActive}
+      isEdit={props.isEdit}
+      data={props.data}
+      onClickUpdate={onClickUpdate}
     ></BoardWriterUI>
   )
 }

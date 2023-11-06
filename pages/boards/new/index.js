@@ -1,9 +1,11 @@
 import BoardWrite from "../../../src/components/units/board/write/BoardWrite.container";
 
-export default function Board() {
+export default function BoardNewPage() {
 
 
   return(
-    <BoardWrite></BoardWrite>
+    <BoardWrite
+      isEdit={false}
+    ></BoardWrite>
   )
 }
