@@ -93,29 +93,23 @@ export default function BoardWrite(props){
     }
   }
   const onClickUpdate = async () => {
-    // if(!writer) {
-    //   setWriterError('작성자를 입력해주세요')
-    // }
-    // if(!password){
-    //   setPasswordError('패스워드를 입력해주세요')
-    // }
-    // if(!title){
-    //   setTitleError('제목을 입력해주세요')
-    // }
-    // if(!contents){
-    //   setContentsError('내용을 입력해주세요')
-    // }
-
-    if(writer && title && password && contents) {
-      alert('게시글이 수정되었습니다.');
+    if(!title && !contents) {
+      alert('수정된 내용이 없습니다.')
+      return
+    }
+    if(!password){
+      alert('패스워드를 입력해주세요')
+      return
+    }
+      const myVariables = {}
+      if(title) myVariables.title = title
+      if(contents) myVariables.contents = contents
+      
       try {
-        const myVariables = {}
-        if(title) myVariables.title = title
-        if(contents) myVariables.contents = contents
         const result = await updateBoard({
           variables: {
             boardId: router.query.num,
-            password: password,
+            password,
             updateBoardInput: myVariables
           }
         });
@@ -124,7 +118,7 @@ export default function BoardWrite(props){
       } catch(error) {
         alert(error.message)
       }
-    }
+    // }
   }
 
   return(
