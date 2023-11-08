@@ -101,24 +101,22 @@ export default function BoardWrite(props){
       alert('패스워드를 입력해주세요')
       return
     }
-      const myVariables = {}
-      if(title) myVariables.title = title
-      if(contents) myVariables.contents = contents
-      
-      try {
-        const result = await updateBoard({
-          variables: {
-            boardId: router.query.num,
-            password,
-            updateBoardInput: myVariables
-          }
-        });
-        console.log(result)
-        router.push(`/boards/detail/${result.data.updateBoard._id}`)
-      } catch(error) {
-        alert(error.message)
-      }
-    // }
+    if(title) myVariables.title = title
+    if(contents) myVariables.contents = contents
+    
+    try {
+      const result = await updateBoard({
+        variables: {
+          boardId: router.query.num,
+          password,
+          updateBoardInput: myVariables
+        }
+      });
+      console.log(result)
+      router.push(`/boards/detail/${result.data.updateBoard._id}`)
+    } catch(error) {
+      alert(error.message)
+    }
   }
 
   return(

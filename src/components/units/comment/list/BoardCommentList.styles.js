@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 
 
 
-
+export const Wrapper = styled.div`
+  margin-bottom: 50px;
+`;
 export const CommentList = styled.div`
   display: flex;
   border-bottom: 1px solid #BDBDBD;
@@ -45,7 +47,9 @@ export const Writer = styled.div`
   font-weight: 700;
 `;
 export const Star = styled.div``;
-export const Edit = styled.div``;
+export const Edit = styled.div`
+  cursor: pointer;
+`;
 export const Delete = styled.div``;
 export const Contents = styled.div``;
 export const CreateAt = styled.div`

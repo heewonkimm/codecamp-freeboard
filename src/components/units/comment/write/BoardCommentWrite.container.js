@@ -1,25 +1,14 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import BoardCommentUI from "./BoardCommentWrite.presenter";
 import { useState } from "react";
 import { useRouter } from "next/router";
-
-const CREATE_COMMENT = gql`
-  mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!){
-    createBoardComment(createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {
-      _id
-      writer
-      contents
-      rating
-      createdAt
-    }
-  }
-`;
-
+import { CREATE_COMMENT } from "./BoardCommentWrite.queries";
+import { FETCH_COMMENT } from "../list/BoardCommentList.container";
 
 export default function BoardCommentWrite() {
 
+  const [createComment] = useMutation(CREATE_COMMENT);
   const router = useRouter();
-  const [CreateBoardComment] = useMutation(CREATE_COMMENT);
 
   const [writer, setWriter] = useState('');
   const [password, setPassword] = useState('');
@@ -37,21 +26,26 @@ export default function BoardCommentWrite() {
 
   const onClickRegister = async() => {
     try {
-      const result = await CreateBoardComment({
+      const result = await createComment({
         variables: {
           createBoardCommentInput: {
             writer: writer,
             password: password,
             contents: contents,
-            rating: 4.5,
-            createdAt: new Date(),
+            rating: 3.2
           },
-          boardId: String(router.query.num)
-        }
-      });
+          boardId: router.query.num
+        },
+        refetchQueries: [
+          {
+            query: FETCH_COMMENT,
+            variables: { boardId: router.query.num }
+          }
+        ]
+      })
       console.log(result)
-    } catch(error){
-      // console.error("코멘트 에러다", error)
+    } catch(e) {
+      console.error("에러다에러", e)
     }
   }
 
