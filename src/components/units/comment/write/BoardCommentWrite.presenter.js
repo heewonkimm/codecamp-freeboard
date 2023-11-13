@@ -10,6 +10,7 @@ export default function BoardCommentUI(props) {
           <input placeholder="작성자" type="text"
           onChange={props.onChangeWriter}
           defaultValue={props.el?.writer}
+          readOnly={props.el?.writer}
           />
           <input placeholder="비밀번호" type="password"
           onChange={props.onChangePassword}
@@ -23,7 +24,7 @@ export default function BoardCommentUI(props) {
             onChange={props.onChangeContents}
             defaultValue={props.el?.contents}
           ></textarea>
-          <button onClick={props.onClickRegister}>등록하기</button>
+          <button onClick={props.isEdit ? props.onClickUpdate : props.onClickRegister}>{props.isEdit ? "수정" : "등록"}하기</button>
         </S.ComBottom>
       </S.CommentBox>
     </S.CommentWrapper>

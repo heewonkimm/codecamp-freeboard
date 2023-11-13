@@ -29,7 +29,6 @@ export default function BoardCommentList() {
   return(
     <BoardCommentListUI
       data={data}
-      // onClickUpdate={onClickUpdate}
     ></BoardCommentListUI>
   )
 }

@@ -1,15 +1,14 @@
 
 import { useState } from "react";
 import * as S from "./BoardCommentList.styles";
-import BoardCommentUI from "../write/BoardCommentWrite.presenter";
+import BoardCommentWrite from "../write/BoardCommentWrite.container";
 
 export default function BoardCommentListItem(props) {
 
   const [isEdit, setIsEdit] = useState(false);
-  const onClickUpdate = () => {
+  const onClickEdit = () => {
     setIsEdit(true)
   }
-
 
   return(
     <>
@@ -25,7 +24,7 @@ export default function BoardCommentListItem(props) {
                 <S.Star><img src="/images/board/detail/star.png"/></S.Star>
               </S.Left>
               <S.Right>
-                <S.Edit onClick={onClickUpdate}><img src="/images/board/detail/comment-edit.png"/></S.Edit>
+                <S.Edit onClick={onClickEdit}><img src="/images/board/detail/comment-edit.png"/></S.Edit>
                 <S.Delete><img src="/images/board/detail/comment-delete.png"/></S.Delete>
               </S.Right>
             </S.ComTop>
@@ -37,7 +36,7 @@ export default function BoardCommentListItem(props) {
         </S.CommentList>
         )
       }
-      {isEdit && <BoardCommentUI el={props.el}/>}
+      {isEdit && <BoardCommentWrite el={props.el} isEdit={isEdit} setIsEdit={setIsEdit}/>}
     </>
   )
 }

@@ -101,6 +101,7 @@ export default function BoardWrite(props){
       alert('패스워드를 입력해주세요')
       return
     }
+    const myVariables = {}
     if(title) myVariables.title = title
     if(contents) myVariables.contents = contents
     

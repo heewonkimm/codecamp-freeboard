@@ -11,3 +11,16 @@ export const CREATE_COMMENT = gql`
     }
   }
 `;
+
+export const UPDATE_COMMENT = gql`
+  mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!, $boardCommentId: ID!,$password: String){
+    updateBoardComment(updateBoardCommentInput: $updateBoardCommentInput, boardCommentId: $boardCommentId, password: $password) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;

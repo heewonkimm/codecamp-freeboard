@@ -1,10 +1,5 @@
 import styled from "@emotion/styled";
 
-
-
-export const Wrapper = styled.div`
-  margin-bottom: 50px;
-`;
 export const CommentList = styled.div`
   display: flex;
   border-bottom: 1px solid #BDBDBD;

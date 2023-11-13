@@ -6,7 +6,7 @@ import BoardCommentWrite from "../../../../src/components/units/comment/write/Bo
 export default function BoardDetailPage() {
 
   return(
-    <div style={{width: "1200px", margin: "0 auto"}}>
+    <div style={{width: "1200px", margin: "0 auto 150px"}}>
       <BoardDetail />
       <BoardCommentWrite />
       <BoardCommentList />
