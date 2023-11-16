@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import BoardWriterUI from "./BoardWrite.presenter";
-import { UPDATE_BOARD, graphqlSetting } from "./BoardWrite.queries";
+import BoardWriterUI from "./BoardWrite.presenter.tsx";
+import { UPDATE_BOARD, graphqlSetting } from "./BoardWrite.queries.tsx";
 
 
 export default function BoardWrite(props){

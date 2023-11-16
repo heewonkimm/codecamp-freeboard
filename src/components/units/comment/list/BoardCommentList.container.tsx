@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import BoardCommentListUI from "./BoardCommentList.presenter";
+import BoardCommentListUI from "./BoardCommentList.presenter.tsx";
 import { useRouter } from "next/router";
 
 export const FETCH_COMMENT = gql`

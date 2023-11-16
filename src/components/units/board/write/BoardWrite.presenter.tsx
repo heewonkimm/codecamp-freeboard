@@ -1,4 +1,4 @@
-import * as S from "./BoardWrite.styles";
+import * as S from "./BoardWrite.styles.tsx";
 
 export default function BoardWriterUI(props) {
 

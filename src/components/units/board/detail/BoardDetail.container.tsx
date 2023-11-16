@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { DELETE_BOARD, FETCH_BOARD } from "./BoardDetail.queries";
-import BoardDetailUI from "./BoardDetail.presenter";
+import { DELETE_BOARD, FETCH_BOARD } from "./BoardDetail.queries.tsx";
+import BoardDetailUI from "./BoardDetail.presenter.tsx";
 
 
 

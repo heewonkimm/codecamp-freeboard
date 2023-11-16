@@ -1,4 +1,4 @@
-import BoardCommentListItem from "./BoardCommentListItem";
+import BoardCommentListItem from "./BoardCommentListItem.tsx";
 
 export default function BoardCommentListUI(props) {
 

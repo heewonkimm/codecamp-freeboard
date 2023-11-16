@@ -1,5 +1,5 @@
-import { Title, List, Wrapper, Footer, Tablebottom, Tabletop } from "./BoardList.styles";
-import { getDate } from "../../../../../src/commons/libraries/utils";
+import { Title, List, Wrapper, Footer, Tablebottom, Tabletop } from "./BoardList.styles.tsx";
+import { getDate } from "../../../../commons/libraries/utils";
 
 
 export default function BoardListUI(props) {

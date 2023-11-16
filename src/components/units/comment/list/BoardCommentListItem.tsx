@@ -1,7 +1,7 @@
 
 import { useState } from "react";
-import * as S from "./BoardCommentList.styles";
-import BoardCommentWrite from "../write/BoardCommentWrite.container";
+import * as S from "./BoardCommentList.styles.tsx";
+import BoardCommentWrite from "../write/BoardCommentWrite.container.tsx";
 
 export default function BoardCommentListItem(props) {
 

@@ -1,4 +1,4 @@
-import BoardWrite from "../../../src/components/units/board/write/BoardWrite.container";
+import BoardWrite from "../../../src/components/units/board/write/BoardWrite.container.tsx";
 
 export default function BoardNewPage() {
 

@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import BoardListUI from "./BoardList.presenter";
+import BoardListUI from "./BoardList.presenter.tsx";
 import { useRouter } from "next/router";
 
 const FETCH_BOARDS = gql`

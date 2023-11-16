@@ -1,4 +1,4 @@
-import * as S from "./BoardDetail.styles";
+import * as S from "./BoardDetail.styles.tsx";
 
 export default function BoardDetailUI(props) {
 

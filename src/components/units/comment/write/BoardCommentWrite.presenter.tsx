@@ -1,4 +1,4 @@
-import * as S from "./BoardCommentWrite.styles";
+import * as S from "./BoardCommentWrite.styles.tsx";
 
 export default function BoardCommentUI(props) {
 

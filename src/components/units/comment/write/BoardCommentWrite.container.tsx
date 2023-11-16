@@ -1,9 +1,9 @@
 import { useMutation } from "@apollo/client";
-import BoardCommentUI from "./BoardCommentWrite.presenter";
+import BoardCommentUI from "./BoardCommentWrite.presenter.tsx";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { CREATE_COMMENT, UPDATE_COMMENT } from "./BoardCommentWrite.queries";
-import { FETCH_COMMENT } from "../list/BoardCommentList.container";
+import { CREATE_COMMENT, UPDATE_COMMENT } from "./BoardCommentWrite.queries.tsx";
+import { FETCH_COMMENT } from "../list/BoardCommentList.container.tsx";
 
 export default function BoardCommentWrite(props) {
 
