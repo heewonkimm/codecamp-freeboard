@@ -20,6 +20,7 @@ export default function BoardCommentWrite(props) {
   };
   const onChangePassword = (e) => {
     setPassword(e.target.value)
+
   };
   const onChangeContents = (e) => {
     setContents(e.target.value)
@@ -30,9 +31,9 @@ export default function BoardCommentWrite(props) {
       const result = await createComment({
         variables: {
           createBoardCommentInput: {
-            writer: writer,
-            password: password,
-            contents: contents,
+            writer,
+            password,
+            contents,
             rating: 3.2
           },
           boardId: router.query.num
@@ -44,6 +45,7 @@ export default function BoardCommentWrite(props) {
           }
         ]
       })
+
       setWriter('')
       setPassword('')
       // console.log(result)
@@ -51,9 +53,11 @@ export default function BoardCommentWrite(props) {
       console.error("에러다에러", e)
     }
   }
-
   const onClickUpdate = async() => {
-
+    if(password !== password) {
+      alert('패스워드가 일치하지 않습니다!')
+      return
+    }
     if(!password) {
       alert('패스워드를 입력해주세요.')
       return
@@ -62,7 +66,6 @@ export default function BoardCommentWrite(props) {
       alert('수정된 내용이 없습니다.')
       return
     }
-
     const myVariables = {
       rating: 7.8
     }
@@ -71,7 +74,7 @@ export default function BoardCommentWrite(props) {
       const result = await updateComment({
         variables: {
           updateBoardCommentInput: myVariables,
-          password: password,
+          password,
           boardCommentId: props.el._id
         },
       })

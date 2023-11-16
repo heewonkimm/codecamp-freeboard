@@ -45,7 +45,9 @@ export const Star = styled.div``;
 export const Edit = styled.div`
   cursor: pointer;
 `;
-export const Delete = styled.div``;
+export const Delete = styled.div`
+  cursor: pointer;
+`;
 export const Contents = styled.div``;
 export const CreateAt = styled.div`
   font-size: 12px;
