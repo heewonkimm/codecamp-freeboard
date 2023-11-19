@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import BoardWriterUI from "./BoardWrite.presenter.tsx";
-import { UPDATE_BOARD, graphqlSetting } from "./BoardWrite.queries.tsx";
+import BoardWriterUI from "./BoardWrite.presenter";
+import { UPDATE_BOARD, graphqlSetting } from "./BoardWrite.queries";
+import { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs, IUpdateBoardInput } from "../../../../../src/commons/types/generated/types";
+import { IBoardWriteProps } from "./BoardWrite.types";
 
 
-export default function BoardWrite(props){
+export default function BoardWrite(props: IBoardWriteProps){
 
   const router = useRouter();
-  const [createBoard] = useMutation(graphqlSetting);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [createBoard] = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(graphqlSetting);
+  const [updateBoard] = useMutation<Pick<IMutation, "updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD);
 
   const [writer, setWriter] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +24,7 @@ export default function BoardWrite(props){
   const [contentsError, setContentsError] = useState('');
   const [isActive, setIsActive] = useState(false);
 
-  function onChangeWriter(e) {
+  function onChangeWriter(e: ChangeEvent<HTMLInputElement>) {
     setWriter(e.target.value);
     setWriterError('')
     if(e.target.value && password && title && contents) {
@@ -31,7 +33,7 @@ export default function BoardWrite(props){
       setIsActive(false)
     }
   }
-  function onChangePassword(e) {
+  function onChangePassword(e: ChangeEvent<HTMLInputElement>) {
     setPassword(e.target.value);
     setPasswordError('')
     if(writer && e.target.value && title && contents) {
@@ -40,7 +42,7 @@ export default function BoardWrite(props){
       setIsActive(false)
     }
   }
-  function onChangeTitle(e) {
+  function onChangeTitle(e: ChangeEvent<HTMLInputElement>) {
     setTitle(e.target.value);
     setTitleError('')
     if(writer && password && e.target.value && contents) {
@@ -49,7 +51,7 @@ export default function BoardWrite(props){
       setIsActive(false)
     }
   }
-  function onChangeContent(e) {
+  function onChangeContent(e: ChangeEvent<HTMLTextAreaElement>) {
     setContents(e.target.value);
     setContentsError('')
     if(writer && password && title && e.target.value) {
@@ -101,14 +103,14 @@ export default function BoardWrite(props){
       alert('패스워드를 입력해주세요')
       return
     }
-    const myVariables = {}
+    const myVariables: IUpdateBoardInput = {}
     if(title) myVariables.title = title
     if(contents) myVariables.contents = contents
     
     try {
       const result = await updateBoard({
         variables: {
-          boardId: router.query.num,
+          boardId: String(router.query.num),
           password,
           updateBoardInput: myVariables
         }

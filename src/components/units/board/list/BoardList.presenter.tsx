@@ -1,8 +1,9 @@
-import { Title, List, Wrapper, Footer, Tablebottom, Tabletop } from "./BoardList.styles.tsx";
+import { Title, List, Wrapper, Footer, Tablebottom, Tabletop } from "./BoardList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
+import { IBoardListUIProps } from "./BoardList.types";
 
 
-export default function BoardListUI(props) {
+export default function BoardListUI(props: IBoardListUIProps) {
 
   return(
     <Wrapper>
@@ -17,15 +18,15 @@ export default function BoardListUI(props) {
         props.data?.fetchBoards.map((el) => (
           <List key={el._id}>
             <span>{el._id}</span>
-            <span className="boardTitle" id={el._id} onClick={props.onClickMoveToBoardDetail}>{el.title}</span>
+            <div className="boardTitle" id={el._id} onClick={props.onClickMoveToBoardDetail}>{el.title}</div>
             <span>{el.writer}</span>
             <span>{getDate(el.createdAt)}</span>
           </List>
         ))
       }
       <Tablebottom></Tablebottom>
-      <Footer onClick={props.onClickMoveToBoardNew}>
-        <button><img src="/images/board/list/write.png"/>게시물 등록하기</button>
+      <Footer>
+        <button onClick={props.onClickMoveToBoardNew}><img src="/images/board/list/write.png"/>게시물 등록하기</button>
       </Footer>
 
     </Wrapper>

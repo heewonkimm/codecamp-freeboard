@@ -1,6 +1,7 @@
-import * as S from "./BoardWrite.styles.tsx";
+import { IBoardWriteUIProps } from "./BoardWrite.types";
+import * as S from "./BoardWrite.styles";
 
-export default function BoardWriterUI(props) {
+export default function BoardWriterUI(props: IBoardWriteUIProps) {
 
   return(
     <S.Wrapper>

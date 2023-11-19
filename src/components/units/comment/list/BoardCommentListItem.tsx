@@ -1,7 +1,7 @@
 
 import { useState } from "react";
-import * as S from "./BoardCommentList.styles.tsx";
-import BoardCommentWrite from "../write/BoardCommentWrite.container.tsx";
+import * as S from "./BoardCommentList.styles";
+import BoardCommentWrite from "../write/BoardCommentWrite.container";
 
 export default function BoardCommentListItem(props) {
 
@@ -25,7 +25,13 @@ export default function BoardCommentListItem(props) {
               </S.Left>
               <S.Right>
                 <S.Edit onClick={onClickEdit}><img src="/images/board/detail/comment-edit.png"/></S.Edit>
-                <S.Delete><img src="/images/board/detail/comment-delete.png"/></S.Delete>
+                <S.Delete>
+                  <img 
+                    id={props.el._id}
+                    onClick={props.onClickDeleteComment}
+                    src="/images/board/detail/comment-delete.png"
+                    />
+                </S.Delete>
               </S.Right>
             </S.ComTop>
             <S.ComBottom>

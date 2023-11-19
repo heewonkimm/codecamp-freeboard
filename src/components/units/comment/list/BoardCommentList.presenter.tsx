@@ -1,4 +1,4 @@
-import BoardCommentListItem from "./BoardCommentListItem.tsx";
+import BoardCommentListItem from "./BoardCommentListItem";
 
 export default function BoardCommentListUI(props) {
 
@@ -6,7 +6,7 @@ export default function BoardCommentListUI(props) {
     <>
       {
         props.data?.fetchBoardComments.map((el) => (
-          <BoardCommentListItem  key={el._id} el={el}/>
+          <BoardCommentListItem  key={el._id} el={el} onClickDeleteComment={props.onClickDeleteComment}/>
         ))
       }
     </>

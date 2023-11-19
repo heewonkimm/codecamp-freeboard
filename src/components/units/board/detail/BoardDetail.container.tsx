@@ -1,16 +1,20 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { DELETE_BOARD, FETCH_BOARD } from "./BoardDetail.queries.tsx";
-import BoardDetailUI from "./BoardDetail.presenter.tsx";
+import { DELETE_BOARD, FETCH_BOARD } from "./BoardDetail.queries";
+import BoardDetailUI from "./BoardDetail.presenter";
+import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardArgs } from "../../../../commons/types/generated/types";
+import { MouseEvent } from "react";
 
 
 
 export default function BoardDetail() {
 
   const router = useRouter();
-  const [deleteBoard] = useMutation(DELETE_BOARD);
+  if(!router || typeof router.query.num !== "string") return <></>
+
+  const [deleteBoard] = useMutation<Pick<IMutation, "deleteBoard">, IMutationDeleteBoardCommentArgs>(DELETE_BOARD);
   
-  const {data} = useQuery(FETCH_BOARD, {
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(FETCH_BOARD, {
     variables: {
       boardId: router.query.num
     }
@@ -20,7 +24,7 @@ export default function BoardDetail() {
     router.push(`/boards`)
   }
 
-  const onClickDelete = (e) => {
+  const onClickDelete = (e: MouseEvent<HTMLButtonElement>) => {
     const deleteConfirm = confirm('정말 삭제하시겠습니까?');
     if(deleteConfirm) {
       deleteBoard({
