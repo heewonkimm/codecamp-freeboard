@@ -12,7 +12,7 @@ export default function BoardWriterUI(props: IBoardWriteUIProps) {
         <S.Writer type="text" placeholder="이름을 적어주세요." 
         onChange={props.onChangeWriter} 
         defaultValue={props.data?.fetchBoard.writer}
-        readOnly={props.data?.fetchBoard.writer}
+        readOnly={Boolean(props.data?.fetchBoard.writer)}
         />
         <S.ErrorMsg>{props.writerError}</S.ErrorMsg>
         <S.ErrorMsg></S.ErrorMsg>
