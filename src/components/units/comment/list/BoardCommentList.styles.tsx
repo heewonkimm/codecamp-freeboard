@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const CommentList = styled.div`
   display: flex;
-  border-bottom: 1px solid #BDBDBD;
+  border-bottom: 1px solid #bdbdbd;
   gap: 12px;
 `;
 export const AvatarWrap = styled.div`
@@ -20,7 +20,7 @@ export const ComTop = styled.div`
   justify-content: space-between;
   margin-bottom: 5px;
   font-size: 16px;
-  color: #4F4F4F;
+  color: #4f4f4f;
 `;
 export const ComBottom = styled.div`
   display: flex;
@@ -51,5 +51,5 @@ export const Delete = styled.div`
 export const Contents = styled.div``;
 export const CreateAt = styled.div`
   font-size: 12px;
-  color: #BDBDBD;
+  color: #bdbdbd;
 `;

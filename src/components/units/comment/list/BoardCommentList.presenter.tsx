@@ -1,15 +1,5 @@
-import BoardCommentListItem from "./BoardCommentListItem";
+import BoardCommentListItem from './BoardCommentListItem';
 
-export default function BoardCommentListUI(props) {
-
-  return(
-    <>
-      {
-        props.data?.fetchBoardComments.map((el) => (
-          <BoardCommentListItem  key={el._id} el={el} onClickDeleteComment={props.onClickDeleteComment}/>
-        ))
-      }
-    </>
-
-  )
+export default function BoardCommentListUI(props): JSX.Element {
+  return <>{props.data?.fetchBoardComments.map((el) => <BoardCommentListItem key={el._id} el={el} onClickDeleteComment={props.onClickDeleteComment} />)}</>;
 }

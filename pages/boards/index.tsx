@@ -1,8 +1,5 @@
-import BoardList from "../../src/components/units/board/list/BoardList.container";
+import BoardList from '../../src/components/units/board/list/BoardList.container';
 
-export default function BoardListPage() {
-
-  return(
-    <BoardList></BoardList>
-  )
+export default function BoardListPage(): JSX.Element {
+  return <BoardList></BoardList>;
 }

@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
-
+import styled from '@emotion/styled';
 
 export const CommentWrapper = styled.div`
   width: 100%;
   padding-top: 40px;
   margin-bottom: 40px;
-  border-top: 1px solid #BDBDBD;
+  border-top: 1px solid #bdbdbd;
 `;
 export const ComTitle = styled.h2`
   display: flex;
@@ -22,9 +21,7 @@ export const ComTitle = styled.h2`
     background-size: cover;
   }
 `;
-export const CommentBox = styled.div`
-  
-`;
+export const CommentBox = styled.div``;
 export const ComTop = styled.div`
   display: flex;
   align-items: center;
@@ -35,11 +32,11 @@ export const ComTop = styled.div`
     height: 52px;
     line-height: 52px;
     padding: 0 24px;
-    border: 1px solid #BDBDBD;
+    border: 1px solid #bdbdbd;
   }
 `;
 export const StarWrap = styled.div`
-position: relative;
+  position: relative;
   &::after {
     position: absolute;
     top: 0;
@@ -61,7 +58,7 @@ export const ComBottom = styled.div`
     box-sizing: border-box;
     resize: none;
     padding: 20px;
-    border: 1px solid #BDBDBD;
+    border: 1px solid #bdbdbd;
   }
   button {
     position: absolute;

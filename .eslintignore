@@ -1,0 +1,3 @@
+src/commons/types/generated/**
+src/components/units/board/detail/BoardDetail.container.tsx
+pages/boards/new/index.js

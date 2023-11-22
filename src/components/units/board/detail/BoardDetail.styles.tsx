@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -33,8 +33,7 @@ export const AvatarWrapper = styled.div`
   gap: 12px;
 `;
 export const Avatar = styled.img``;
-export const Info = styled.div`
-`;
+export const Info = styled.div``;
 export const Writer = styled.div`
   font-size: 24px;
 `;
@@ -69,9 +68,8 @@ export const Button = styled.button`
   border: 1px solid #bdbdbd;
   background-color: #fff;
   cursor: pointer;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
   &:hover {
     background-color: gold;
   }
 `;
-

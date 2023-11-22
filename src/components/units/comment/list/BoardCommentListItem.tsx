@@ -1,36 +1,34 @@
+import { useState } from 'react';
+import * as S from './BoardCommentList.styles';
+import BoardCommentWrite from '../write/BoardCommentWrite.container';
 
-import { useState } from "react";
-import * as S from "./BoardCommentList.styles";
-import BoardCommentWrite from "../write/BoardCommentWrite.container";
-
-export default function BoardCommentListItem(props) {
-
+export default function BoardCommentListItem(props): JSX.Element {
   const [isEdit, setIsEdit] = useState(false);
-  const onClickEdit = () => {
-    setIsEdit(true)
-  }
+  const onClickEdit = (): void => {
+    setIsEdit(true);
+  };
 
-  return(
+  return (
     <>
       {!isEdit && (
         <S.CommentList>
           <S.AvatarWrap>
-            <img src="/images/board/detail/comment-avatar.png"/>
+            <img src="/images/board/detail/comment-avatar.png" />
           </S.AvatarWrap>
           <S.ContentWrap>
             <S.ComTop>
               <S.Left>
                 <S.Writer>{props.el.writer}</S.Writer>
-                <S.Star><img src="/images/board/detail/star.png"/></S.Star>
+                <S.Star>
+                  <img src="/images/board/detail/star.png" />
+                </S.Star>
               </S.Left>
               <S.Right>
-                <S.Edit onClick={onClickEdit}><img src="/images/board/detail/comment-edit.png"/></S.Edit>
+                <S.Edit onClick={onClickEdit}>
+                  <img src="/images/board/detail/comment-edit.png" />
+                </S.Edit>
                 <S.Delete>
-                  <img 
-                    id={props.el._id}
-                    onClick={props.onClickDeleteComment}
-                    src="/images/board/detail/comment-delete.png"
-                    />
+                  <img id={props.el._id} onClick={props.onClickDeleteComment} src="/images/board/detail/comment-delete.png" />
                 </S.Delete>
               </S.Right>
             </S.ComTop>
@@ -40,9 +38,8 @@ export default function BoardCommentListItem(props) {
             </S.ComBottom>
           </S.ContentWrap>
         </S.CommentList>
-        )
-      }
-      {isEdit && <BoardCommentWrite el={props.el} isEdit={isEdit} setIsEdit={setIsEdit}/>}
+      )}
+      {isEdit && <BoardCommentWrite el={props.el} isEdit={isEdit} setIsEdit={setIsEdit} />}
     </>
-  )
+  );
 }

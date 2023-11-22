@@ -1,5 +1,4 @@
-import styled from "@emotion/styled"
-
+import styled from '@emotion/styled';
 
 export const Tabletop = styled.div`
   border-top: 1px solid #000;
@@ -8,7 +7,6 @@ export const Tabletop = styled.div`
 export const Tablebottom = styled.div`
   border-bottom: 1px solid #000;
   margin-bottom: 40px;
-
 `;
 export const Wrapper = styled.div`
   width: 1200px;
@@ -21,7 +19,7 @@ export const Wrapper = styled.div`
     width: 120px;
   }
   .boardTitle {
-    flex:1
+    flex: 1;
   }
 `;
 export const Title = styled.div`
@@ -36,7 +34,7 @@ export const List = styled.div`
   line-height: 52px;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
   &:hover {
     background-color: #efefef;
   }
