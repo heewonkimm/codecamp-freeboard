@@ -36,7 +36,7 @@ export const ComTop = styled.div`
   }
 `;
 export const StarWrap = styled.div`
-  position: relative;
+  /* position: relative;
   &::after {
     position: absolute;
     top: 0;
@@ -47,7 +47,7 @@ export const StarWrap = styled.div`
     width: 100%;
     height: 24px;
     background-size: cover;
-  }
+  } */
 `;
 
 export const ComBottom = styled.div`

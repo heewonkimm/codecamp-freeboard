@@ -15,6 +15,7 @@ export default function BoardCommentWrite(props): JSX.Element {
   const [writer, setWriter] = useState('');
   const [password, setPassword] = useState('');
   const [contents, setContents] = useState('');
+  const [star, setStar] = useState(0);
 
   const onChangeWriter = (e: ChangeEvent<HTMLInputElement>): void => {
     setWriter(e.target.value);
@@ -38,7 +39,7 @@ export default function BoardCommentWrite(props): JSX.Element {
             writer,
             password,
             contents,
-            rating: 3.2,
+            rating: star,
           },
           boardId: router.query.num,
         },
@@ -98,6 +99,7 @@ export default function BoardCommentWrite(props): JSX.Element {
       onChangeContents={onChangeContents}
       isEdit={props.isEdit}
       el={props.el}
+      setStar={setStar}
     ></BoardCommentUI>
   );
 }

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import * as S from './BoardCommentList.styles';
 import BoardCommentWrite from '../write/BoardCommentWrite.container';
+import { Rate } from 'antd';
 
 export default function BoardCommentListItem(props): JSX.Element {
   const [isEdit, setIsEdit] = useState(false);
   const onClickEdit = (): void => {
     setIsEdit(true);
   };
-
   return (
     <>
       {!isEdit && (
@@ -20,7 +20,7 @@ export default function BoardCommentListItem(props): JSX.Element {
               <S.Left>
                 <S.Writer>{props.el.writer}</S.Writer>
                 <S.Star>
-                  <img src="/images/board/detail/star.png" />
+                  <Rate value={props.el.rating}></Rate>
                 </S.Star>
               </S.Left>
               <S.Right>

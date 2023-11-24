@@ -73,3 +73,20 @@ export const Button = styled.button`
     background-color: gold;
   }
 `;
+
+export const Feedback = styled.div`
+  display: flex;
+  gap: 48px;
+  span {
+    display: block;
+    text-align: center;
+  }
+`;
+export const Like = styled.div`
+  color: #ffd600;
+  cursor: pointer;
+`;
+export const Dislike = styled.div`
+  color: #828282;
+  cursor: pointer;
+`;

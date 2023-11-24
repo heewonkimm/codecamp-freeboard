@@ -22,7 +22,7 @@ export default function BoardCommentList(): JSX.Element {
   const [deleteComment] = useMutation(DELETE_COMMENT);
 
   const onClickDeleteComment = async (e: MouseEvent<HTMLImageElement>): Promise<void> => {
-    const password = prompt('비밀번호를 입력하세요!a');
+    const password = prompt('비밀번호를 입력하세요!');
     try {
       if (!(e.target instanceof HTMLImageElement)) {
         alert('시스템에 문제가 있습니다.');

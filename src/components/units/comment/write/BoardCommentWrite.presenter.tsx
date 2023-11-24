@@ -1,3 +1,4 @@
+import { Rate } from 'antd';
 import * as S from './BoardCommentWrite.styles';
 import type { IBoardCommentUIProps } from './BoardCommentWrite.types';
 
@@ -10,7 +11,7 @@ export default function BoardCommentUI(props: IBoardCommentUIProps): JSX.Element
           <input placeholder="작성자" type="text" onChange={props.onChangeWriter} defaultValue={props.el?.writer} readOnly={props.el?.writer} />
           <input placeholder="비밀번호" type="password" onChange={props.onChangePassword} />
           <S.StarWrap>
-            <img src="/images/board/detail/star.png" />
+            <Rate onChange={props.setStar}></Rate>
           </S.StarWrap>
         </S.ComTop>
         <S.ComBottom>

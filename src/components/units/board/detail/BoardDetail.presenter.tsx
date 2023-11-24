@@ -18,6 +18,16 @@ export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
           <S.Title>{props.data?.fetchBoard.title}</S.Title>
           <S.Contents>{props.data?.fetchBoard.contents}</S.Contents>
         </S.Body>
+        <S.Feedback>
+          <S.Like onClick={props.onClickUp}>
+            <img src="/images/board/detail/btn-like.png" alt="" />
+            <span>{props.like}</span>
+          </S.Like>
+          <S.Dislike onClick={props.onClickDown}>
+            <img src="/images/board/detail/btn-dislike.png" alt="" />
+            <span>{props.dislike}</span>
+          </S.Dislike>
+        </S.Feedback>
       </S.CardWrapper>
       <S.BottomWrapper>
         <S.Button onClick={props.onClickList}>목록으로</S.Button>

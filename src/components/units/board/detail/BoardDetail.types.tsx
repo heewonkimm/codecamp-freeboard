@@ -6,4 +6,8 @@ export interface IBoardDetailUIProps {
   onClickDelete: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickList: () => void;
   onClickMoveEdit: () => void;
+  onClickUp: () => void;
+  onClickDown: () => void;
+  like: number;
+  dislike: number;
 }

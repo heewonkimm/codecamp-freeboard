@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { DELETE_BOARD, FETCH_BOARD } from './BoardDetail.queries';
 import BoardDetailUI from './BoardDetail.presenter';
 import type { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardArgs } from '../../../../commons/types/generated/types';
-import type { MouseEvent } from 'react';
+import { useState, type MouseEvent } from 'react';
 
 export default function BoardDetail(): JSX.Element {
   const router = useRouter();
@@ -38,5 +38,25 @@ export default function BoardDetail(): JSX.Element {
     void router.push(`/boards/detail/${router.query.num}/edit`);
   };
 
-  return <BoardDetailUI data={data} onClickDelete={onClickDelete} onClickList={onClickList} onClickMoveEdit={onClickMoveEdit}></BoardDetailUI>;
+  const [like, setLike] = useState(0);
+  const [dislike, setDislike] = useState(0);
+
+  const onClickUp = (): void => {
+    setLike((prev) => prev + 1);
+  };
+  const onClickDown = (): void => {
+    setDislike((prev) => prev + 1);
+  };
+  return (
+    <BoardDetailUI
+      data={data}
+      onClickDelete={onClickDelete}
+      onClickList={onClickList}
+      onClickMoveEdit={onClickMoveEdit}
+      onClickUp={onClickUp}
+      onClickDown={onClickDown}
+      like={like}
+      dislike={dislike}
+    ></BoardDetailUI>
+  );
 }
