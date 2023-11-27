@@ -3,7 +3,8 @@ import BoardCommentListUI from './BoardCommentList.presenter';
 import { useRouter } from 'next/router';
 import type { IQuery, IQueryFetchBoardCommentsArgs } from '../../../../../src/commons/types/generated/types';
 import { FETCH_COMMENT } from './BoardCommentList.queries';
-import type { MouseEvent } from 'react';
+import type { MouseEvent, ChangeEvent } from 'react';
+import { useState } from 'react';
 
 const DELETE_COMMENT = gql`
   mutation deleteBoardComment($boardCommentId: ID!, $password: String) {
@@ -19,18 +20,17 @@ export default function BoardCommentList(): JSX.Element {
     },
   });
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+
   const [deleteComment] = useMutation(DELETE_COMMENT);
 
-  const onClickDeleteComment = async (e: MouseEvent<HTMLImageElement>): Promise<void> => {
-    const password = prompt('비밀번호를 입력하세요!');
+  const onClickDeleteComment = async (): Promise<void> => {
     try {
-      if (!(e.target instanceof HTMLImageElement)) {
-        alert('시스템에 문제가 있습니다.');
-        return;
-      }
       await deleteComment({
         variables: {
-          boardCommentId: e.target.id,
+          boardCommentId: id,
           password,
         },
         refetchQueries: [
@@ -43,7 +43,31 @@ export default function BoardCommentList(): JSX.Element {
     } catch (e) {
       if (e instanceof Error) alert(e.message);
     }
+    setIsDeleteModalOpen(false);
   };
 
-  return <BoardCommentListUI data={data} onClickDeleteComment={onClickDeleteComment}></BoardCommentListUI>;
+  const onClickOpenModal = (e: MouseEvent<HTMLImageElement>): void => {
+    setIsDeleteModalOpen(true);
+    setId(e.target.id);
+  };
+
+  const onClickDeleteCancel = (): void => {
+    setIsDeleteModalOpen(false);
+    return;
+  };
+
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>): void => {
+    setPassword(e.target.value);
+  };
+
+  return (
+    <BoardCommentListUI
+      data={data}
+      onClickOpenModal={onClickOpenModal}
+      isDeleteModalOpen={isDeleteModalOpen}
+      onClickDeleteComment={onClickDeleteComment}
+      onChangePassword={onChangePassword}
+      onClickDeleteCancel={onClickDeleteCancel}
+    ></BoardCommentListUI>
+  );
 }

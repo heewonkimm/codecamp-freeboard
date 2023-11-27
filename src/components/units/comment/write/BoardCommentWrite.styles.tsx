@@ -35,20 +35,7 @@ export const ComTop = styled.div`
     border: 1px solid #bdbdbd;
   }
 `;
-export const StarWrap = styled.div`
-  /* position: relative;
-  &::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: '';
-    display: block;
-    background: url('/images/board/detail/star-fill.png') no-repeat;
-    width: 100%;
-    height: 24px;
-    background-size: cover;
-  } */
-`;
+export const StarWrap = styled.div``;
 
 export const ComBottom = styled.div`
   position: relative;

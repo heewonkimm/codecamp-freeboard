@@ -8,5 +8,9 @@ export interface IBoardCommentUIProps {
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   isEdit: boolean;
   el: any;
-  setStar: any;
+  setRating: any;
+  writer: string;
+  password: string;
+  contents: string;
+  rating: any;
 }

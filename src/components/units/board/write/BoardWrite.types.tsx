@@ -15,11 +15,20 @@ export interface IBoardWriteUIProps {
   passwordError: string;
   titleError: string;
   contentsError: string;
-  onClick: () => void;
+  onClickOpenModal: () => void;
   onClickUpdate: () => void;
   isActive: boolean;
   isEdit: boolean;
   data?: Pick<IQuery, 'fetchBoard'>;
+  isModalOpen: boolean;
+  onClickRegister: () => void;
+  onClickCancel: () => void;
+  isOpen: boolean;
+  onClickAddress: () => void;
+  onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+  onCompleteAddressSearch: (data: any) => void;
+  address: string;
+  zipcode: string;
 }
 
 export interface ISubmitButtonProps {

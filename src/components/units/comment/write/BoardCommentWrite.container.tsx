@@ -15,7 +15,7 @@ export default function BoardCommentWrite(props): JSX.Element {
   const [writer, setWriter] = useState('');
   const [password, setPassword] = useState('');
   const [contents, setContents] = useState('');
-  const [star, setStar] = useState(0);
+  const [rating, setRating] = useState(0);
 
   const onChangeWriter = (e: ChangeEvent<HTMLInputElement>): void => {
     setWriter(e.target.value);
@@ -33,13 +33,13 @@ export default function BoardCommentWrite(props): JSX.Element {
         alert('시스템에 문제가 있습니다.');
         return;
       }
-      const result = await createComment({
+      await createComment({
         variables: {
           createBoardCommentInput: {
             writer,
             password,
             contents,
-            rating: star,
+            rating,
           },
           boardId: router.query.num,
         },
@@ -50,10 +50,11 @@ export default function BoardCommentWrite(props): JSX.Element {
           },
         ],
       });
-      console.log(result);
 
       setWriter('');
       setPassword('');
+      setContents('');
+      setRating(0);
     } catch (e) {
       if (e instanceof Error) alert(e.message);
     }
@@ -67,16 +68,16 @@ export default function BoardCommentWrite(props): JSX.Element {
       alert('패스워드를 입력해주세요.');
       return;
     }
-    if (!contents) {
+    if (!contents && !rating) {
       alert('수정된 내용이 없습니다.');
       return;
     }
-    const myVariables: IUpdateBoardCommentInput = {
-      rating: 7.8,
-    };
+    const myVariables: IUpdateBoardCommentInput = {};
     if (contents) myVariables.contents = contents;
+    if (rating) myVariables.rating = rating;
+
     try {
-      const result = await updateComment({
+      await updateComment({
         variables: {
           updateBoardCommentInput: myVariables,
           password,
@@ -84,12 +85,10 @@ export default function BoardCommentWrite(props): JSX.Element {
         },
       });
       props.setIsEdit(false);
-      console.log(result);
     } catch (e) {
       if (e instanceof Error) alert(e.message);
     }
   };
-
   return (
     <BoardCommentUI
       onClickRegister={onClickRegister}
@@ -99,7 +98,11 @@ export default function BoardCommentWrite(props): JSX.Element {
       onChangeContents={onChangeContents}
       isEdit={props.isEdit}
       el={props.el}
-      setStar={setStar}
+      setRating={setRating}
+      writer={writer}
+      password={password}
+      contents={contents}
+      rating={rating}
     ></BoardCommentUI>
   );
 }

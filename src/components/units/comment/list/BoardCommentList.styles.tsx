@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Modal } from 'antd';
 
 export const CommentList = styled.div`
   display: flex;
@@ -52,4 +53,12 @@ export const Contents = styled.div``;
 export const CreateAt = styled.div`
   font-size: 12px;
   color: #bdbdbd;
+`;
+
+export const PasswordModal = styled(Modal)`
+  color: blue;
+`;
+
+export const PasswordInput = styled.input`
+  width: 100%;
 `;

@@ -1,9 +1,21 @@
 import type { IBoardWriteUIProps } from './BoardWrite.types';
 import * as S from './BoardWrite.styles';
+import { Modal } from 'antd';
+import DaumPostcode from 'react-daum-postcode';
 
 export default function BoardWriterUI(props: IBoardWriteUIProps): JSX.Element {
   return (
     <S.Wrapper>
+      {props.isModalOpen && (
+        <Modal open={true} onOk={props.onClickRegister} onCancel={props.onClickCancel}>
+          <p>게시글을 등록하시겠습니까?</p>
+        </Modal>
+      )}
+      {props.isOpen && (
+        <Modal open={true}>
+          <DaumPostcode onComplete={props.onCompleteAddressSearch}></DaumPostcode>
+        </Modal>
+      )}
       <S.Title>게시글 {props.isEdit ? '수정' : '등록'}하기</S.Title>
       <S.WriterWrapper>
         <S.InputWrapper>
@@ -37,11 +49,11 @@ export default function BoardWriterUI(props: IBoardWriteUIProps): JSX.Element {
       <S.InputWrapper>
         <S.Label>주소</S.Label>
         <S.ZipcodeWrapper>
-          <S.Zipcode placeholder="07250" />
-          <S.SearchButton>우편번호 검색</S.SearchButton>
+          <S.Zipcode placeholder="07250" readOnly value={props.zipcode !== '' ? props.zipcode : props.data?.fetchBoard.boardAddress?.zipcode ?? ''} />
+          <S.SearchButton onClick={props.onClickAddress}>우편번호 검색</S.SearchButton>
         </S.ZipcodeWrapper>
-        <S.Address />
-        <S.Address />
+        <S.Address readOnly value={props.address !== '' ? props.address : props.data?.fetchBoard.boardAddress.address ?? ''} />
+        <S.Address onChange={props.onChangeAddressDetail} defaultValue={props.data?.fetchBoard.boardAddress.addressDetail} />
       </S.InputWrapper>
       <S.InputWrapper>
         <S.Label>유튜브</S.Label>
@@ -61,7 +73,7 @@ export default function BoardWriterUI(props: IBoardWriteUIProps): JSX.Element {
         <S.RadioLabel htmlFor="image">사진</S.RadioLabel>
       </S.OptionWrapper>
       <S.ButtonWrapper>
-        <S.SubmitButton isActive={props.isEdit ? true : props.isActive} onClick={props.isEdit ? props.onClickUpdate : props.onClick}>
+        <S.SubmitButton isActive={props.isEdit ? true : props.isActive} onClick={props.isEdit ? props.onClickUpdate : props.onClickOpenModal}>
           {props.isEdit ? '수정' : '등록'}하기
         </S.SubmitButton>
       </S.ButtonWrapper>

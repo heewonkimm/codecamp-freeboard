@@ -9,6 +9,9 @@ export default function BoardDetail(): JSX.Element {
   const router = useRouter();
   if (typeof router.query.num !== 'string') return <></>;
 
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [id, setId] = useState('');
+
   const [deleteBoard] = useMutation<Pick<IMutation, 'deleteBoard'>, IMutationDeleteBoardCommentArgs>(DELETE_BOARD);
 
   const { data } = useQuery<Pick<IQuery, 'fetchBoard'>, IQueryFetchBoardArgs>(FETCH_BOARD, {
@@ -21,17 +24,22 @@ export default function BoardDetail(): JSX.Element {
     void router.push(`/boards`);
   };
 
-  const onClickDelete = (e: MouseEvent<HTMLButtonElement>): void => {
-    const deleteConfirm = confirm('정말 삭제하시겠습니까?');
-    if (deleteConfirm) {
-      deleteBoard({
-        variables: { boardId: e.target.id },
-        refetchQueries: [{ query: FETCH_BOARD }],
-      });
-      void router.push(`/boards`);
-    } else {
-      return;
-    }
+  const onClickOpenModal = (e: MouseEvent<HTMLButtonElement>): void => {
+    setIsOpenDeleteModal(true);
+    setId(e.target.id);
+  };
+
+  const onClickDelete = async (): Promise<void> => {
+    await deleteBoard({
+      variables: { boardId: id },
+      refetchQueries: [{ query: FETCH_BOARD }],
+    });
+    void router.push(`/boards`);
+  };
+
+  const onClickDeleteCancel = () => {
+    setIsOpenDeleteModal(false);
+    return;
   };
 
   const onClickMoveEdit = (): void => {
@@ -50,13 +58,16 @@ export default function BoardDetail(): JSX.Element {
   return (
     <BoardDetailUI
       data={data}
-      onClickDelete={onClickDelete}
+      onClickOpenModal={onClickOpenModal}
       onClickList={onClickList}
       onClickMoveEdit={onClickMoveEdit}
       onClickUp={onClickUp}
       onClickDown={onClickDown}
       like={like}
       dislike={dislike}
+      isOpenDeleteModal={isOpenDeleteModal}
+      onClickDelete={onClickDelete}
+      onClickDeleteCancel={onClickDeleteCancel}
     ></BoardDetailUI>
   );
 }

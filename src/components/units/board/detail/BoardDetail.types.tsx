@@ -3,11 +3,14 @@ import type { MouseEvent } from 'react';
 
 export interface IBoardDetailUIProps {
   data?: Pick<IQuery, 'fetchBoard'>;
-  onClickDelete: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickOpenModal: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickList: () => void;
   onClickMoveEdit: () => void;
   onClickUp: () => void;
   onClickDown: () => void;
   like: number;
   dislike: number;
+  isOpenDeleteModal: boolean;
+  onClickDelete: () => void;
+  onClickDeleteCancel: () => void;
 }

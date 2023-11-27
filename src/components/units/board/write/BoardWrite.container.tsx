@@ -6,6 +6,7 @@ import BoardWriterUI from './BoardWrite.presenter';
 import { UPDATE_BOARD, graphqlSetting } from './BoardWrite.queries';
 import type { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs, IUpdateBoardInput } from '../../../../../src/commons/types/generated/types';
 import type { IBoardWriteProps } from './BoardWrite.types';
+import type { Address } from 'react-daum-postcode';
 
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const router = useRouter();
@@ -22,7 +23,11 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const [titleError, setTitleError] = useState('');
   const [contentsError, setContentsError] = useState('');
   const [isActive, setIsActive] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [zipcode, setZipcode] = useState('');
+  const [address, setAddress] = useState('');
+  const [addressDetail, setAddressDetail] = useState('');
   function onChangeWriter(e: ChangeEvent<HTMLInputElement>): void {
     setWriter(e.target.value);
     setWriterError('');
@@ -60,7 +65,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   }
 
-  const onClick = async (): Promise<void> => {
+  const onClickOpenModal = (): void => {
     if (!writer) {
       setWriterError('작성자를 입력해주세요');
     }
@@ -74,27 +79,39 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       setContentsError('내용을 입력해주세요');
     }
     if (writer && title && password && contents) {
-      alert('게시글이 등록되었습니다.');
-      try {
-        const result = await createBoard({
-          variables: {
-            createBoardInput: {
-              writer,
-              title,
-              password,
-              contents,
-            },
-          },
-        });
-        console.log(result);
-        void router.push(`/boards/detail/${result.data.createBoard._id}`);
-      } catch (error) {
-        alert(error.message);
-      }
+      setIsModalOpen(true);
     }
   };
+
+  const onClickRegister = async (): Promise<void> => {
+    try {
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer,
+            title,
+            password,
+            contents,
+            boardAddress: {
+              zipcode,
+              address,
+              addressDetail,
+            },
+          },
+        },
+      });
+      void router.push(`/boards/detail/${result.data.createBoard._id}`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+  const onClickCancel = (): void => {
+    setIsModalOpen(false);
+    return;
+  };
+
   const onClickUpdate = async (): Promise<void> => {
-    if (!title && !contents) {
+    if (!title && !contents && !zipcode && !address && !addressDetail) {
       alert('수정된 내용이 없습니다.');
       return;
     }
@@ -102,9 +119,14 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       alert('패스워드를 입력해주세요');
       return;
     }
-    const myVariables: IUpdateBoardInput = {};
+    const myVariables: IUpdateBoardInput = {
+      boardAddress: {},
+    };
     if (title) myVariables.title = title;
     if (contents) myVariables.contents = contents;
+    if (zipcode) myVariables.boardAddress.zipcode = zipcode;
+    if (address) myVariables.boardAddress.address = address;
+    if (addressDetail) myVariables.boardAddress.addressDetail = addressDetail;
 
     try {
       const result = await updateBoard({
@@ -114,11 +136,23 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
           updateBoardInput: myVariables,
         },
       });
-      console.log(result);
       void router.push(`/boards/detail/${result.data.updateBoard._id}`);
     } catch (error) {
       alert(error.message);
     }
+  };
+  const onClickAddress = (): void => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const onChangeAddressDetail = (e: ChangeEvent<HTMLInputElement>): void => {
+    setAddressDetail(e.target.value);
+  };
+
+  const onCompleteAddressSearch = (data: Address): void => {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
   };
 
   return (
@@ -127,7 +161,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       onChangePassword={onChangePassword}
       onChangeTitle={onChangeTitle}
       onChangeContent={onChangeContent}
-      onClick={onClick}
+      onClickOpenModal={onClickOpenModal}
       writerError={writerError}
       passwordError={passwordError}
       titleError={titleError}
@@ -136,6 +170,15 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       isEdit={props.isEdit}
       data={props.data}
       onClickUpdate={onClickUpdate}
+      isModalOpen={isModalOpen}
+      onClickRegister={onClickRegister}
+      onClickCancel={onClickCancel}
+      isOpen={isOpen}
+      onClickAddress={onClickAddress}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onCompleteAddressSearch={onCompleteAddressSearch}
+      address={address}
+      zipcode={zipcode}
     ></BoardWriterUI>
   );
 }
