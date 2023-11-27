@@ -31,6 +31,7 @@ export const Header = styled.div`
 export const AvatarWrapper = styled.div`
   display: flex;
   gap: 12px;
+  position: relative;
 `;
 export const Avatar = styled.img``;
 export const Info = styled.div``;
@@ -89,4 +90,22 @@ export const Like = styled.div`
 export const Dislike = styled.div`
   color: #828282;
   cursor: pointer;
+`;
+export const Address = styled.div`
+  position: absolute;
+  background-color: gold;
+  text-align: center;
+  padding: 10px 10px;
+  right: 0;
+  bottom: 0;
+  &:hover {
+  }
+`;
+
+export const Youtube = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 70px;
 `;

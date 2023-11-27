@@ -57,7 +57,7 @@ export default function BoardWriterUI(props: IBoardWriteUIProps): JSX.Element {
       </S.InputWrapper>
       <S.InputWrapper>
         <S.Label>유튜브</S.Label>
-        <S.Youtube placeholder="링크를 복사해주세요." />
+        <S.Youtube placeholder="링크를 복사해주세요." onChange={props.onChangeYoutubeUrl} defaultValue={props.data?.fetchBoard.youtubeUrl ?? ''} />
       </S.InputWrapper>
       <S.ImageWrapper>
         <S.Label>사진첨부</S.Label>

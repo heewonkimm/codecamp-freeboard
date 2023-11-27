@@ -29,6 +29,7 @@ export interface IBoardWriteUIProps {
   onCompleteAddressSearch: (data: any) => void;
   address: string;
   zipcode: string;
+  onChangeYoutubeUrl: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface ISubmitButtonProps {

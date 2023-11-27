@@ -1,6 +1,7 @@
-import { Modal } from 'antd';
+import { Modal, Tooltip } from 'antd';
 import * as S from './BoardDetail.styles';
 import type { IBoardDetailUIProps } from './BoardDetail.types';
+import ReactPlayer from 'react-player';
 
 export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
   return (
@@ -10,6 +11,7 @@ export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
           <p>정말 삭제하시겠습니까?</p>
         </Modal>
       )}
+
       <S.CardWrapper>
         <S.Header>
           <S.AvatarWrapper>
@@ -17,16 +19,24 @@ export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
             <S.Info>
               <S.Writer>{props.data?.fetchBoard.writer}</S.Writer>
               <S.CreateAt>Date : 2021.02.18</S.CreateAt>
+              {
+                <Tooltip
+                  placement="topRight"
+                  title={`우편번호: ${props.data?.fetchBoard.boardAddress?.zipcode}, 주소: ${props.data?.fetchBoard.boardAddress?.address} ${props.data?.fetchBoard.boardAddress?.addressDetail}`}
+                >
+                  <S.Address>위치 보기</S.Address>
+                </Tooltip>
+              }
             </S.Info>
           </S.AvatarWrapper>
         </S.Header>
         <S.Body>
           <S.Title>Title : {props.data?.fetchBoard.title}</S.Title>
           <S.Contents>Contents : {props.data?.fetchBoard.contents}</S.Contents>
-          <br />
-          <span>우편번호 : {props.data?.fetchBoard.boardAddress?.zipcode}</span>
-          <span>주소 : {props.data?.fetchBoard.boardAddress?.address}</span>
-          <span>상세주소 : {props.data?.fetchBoard.boardAddress?.addressDetail}</span>
+          <S.Youtube>
+            유튜브
+            <ReactPlayer url={props.data?.fetchBoard.youtubeUrl} width="720px" height="540px"></ReactPlayer>
+          </S.Youtube>
         </S.Body>
         <S.Feedback>
           <S.Like onClick={props.onClickUp}>
