@@ -4,7 +4,7 @@ import type { ILayoutHeaderProps } from './LayoutHeader.types';
 export default function LayoutHeaderUI(props: ILayoutHeaderProps): JSX.Element {
   return (
     <Header>
-      <div onClick={props.onClickLogin}>
+      <div onClick={props.onClickLogo} style={{ cursor: 'pointer' }}>
         <img src="/images/logo.png" alt="" />
       </div>
       <Utils>

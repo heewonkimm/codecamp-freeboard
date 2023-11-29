@@ -52,8 +52,8 @@ export default function BoardWriterUI(props: IBoardWriteUIProps): JSX.Element {
           <S.Zipcode placeholder="07250" readOnly value={props.zipcode !== '' ? props.zipcode : props.data?.fetchBoard.boardAddress?.zipcode ?? ''} />
           <S.SearchButton onClick={props.onClickAddress}>우편번호 검색</S.SearchButton>
         </S.ZipcodeWrapper>
-        <S.Address readOnly value={props.address !== '' ? props.address : props.data?.fetchBoard.boardAddress.address ?? ''} />
-        <S.Address onChange={props.onChangeAddressDetail} defaultValue={props.data?.fetchBoard.boardAddress.addressDetail} />
+        <S.Address readOnly value={props.address !== '' ? props.address : props.data?.fetchBoard.boardAddress?.address ?? ''} />
+        <S.Address onChange={props.onChangeAddressDetail} defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail} />
       </S.InputWrapper>
       <S.InputWrapper>
         <S.Label>유튜브</S.Label>
