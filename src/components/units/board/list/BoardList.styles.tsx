@@ -14,13 +14,13 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  span {
-    display: inline-block;
-    width: 120px;
-  }
   .boardTitle {
     flex: 1;
   }
+`;
+export const Span1 = styled.span`
+  display: inline-block;
+  width: 120px;
 `;
 export const Title = styled.div`
   display: flex;
@@ -42,6 +42,7 @@ export const List = styled.div`
 export const Footer = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 80px;
   button {
     display: flex;
     align-items: center;
