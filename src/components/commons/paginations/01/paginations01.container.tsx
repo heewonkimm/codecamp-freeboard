@@ -1,27 +1,17 @@
-import styled from '@emotion/styled';
+import Paginations01UI from './paginations01.presenter';
 import type { IPagination01Props } from './paginations01.types';
-import { useState, type MouseEvent } from 'react';
-
-const PageNum = styled.span`
-  padding: 10px;
-  margin: 0 10px;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.4;
-  }
-`;
-const PageMove = styled.span`
-  padding: 10px;
-  cursor: pointer;
-`;
+import type { MouseEvent } from 'react';
+import { useState } from 'react';
 
 export default function Paginations01(props: IPagination01Props): JSX.Element {
-  const [startPage, setStartPage] = useState(12490);
+  const [startPage, setStartPage] = useState(1);
+  const [pageColorNum, setPageColorNum] = useState(1);
   const lastPage = Math.ceil(props.count ?? 5 / 5);
 
   const onClickPage = (e: MouseEvent<HTMLSpanElement>): void => {
     const activedPage = Number(e.currentTarget.id);
-    props.refetch({ page: activedPage });
+    void props.refetch({ page: activedPage });
+    setPageColorNum(activedPage);
   };
 
   const onClickPrevPage = (): void => {
@@ -38,17 +28,13 @@ export default function Paginations01(props: IPagination01Props): JSX.Element {
   };
 
   return (
-    <div>
-      <PageMove onClick={onClickPrevPage}>{`<`}</PageMove>
-      {new Array(5).fill('a').map(
-        (_, index) =>
-          startPage + index <= lastPage && (
-            <PageNum key={index + startPage} id={String(index + startPage)} onClick={onClickPage}>
-              {index + startPage}
-            </PageNum>
-          )
-      )}
-      <PageMove onClick={onClickNextPage}>{`>`}</PageMove>
-    </div>
+    <Paginations01UI
+      startPage={startPage}
+      lastPage={lastPage}
+      pageColorNum={pageColorNum}
+      onClickPage={onClickPage}
+      onClickPrevPage={onClickPrevPage}
+      onClickNextPage={onClickNextPage}
+    ></Paginations01UI>
   );
 }

@@ -5,9 +5,9 @@ import LayoutNavigation from './navigation/LayoutNavigation.container';
 export default function Layout(props): JSX.Element {
   return (
     <>
-      <LayoutHeader></LayoutHeader>
-      <LayoutBanner></LayoutBanner>
-      <LayoutNavigation></LayoutNavigation>
+      {/* <LayoutHeader></LayoutHeader> */}
+      {/* <LayoutBanner></LayoutBanner> */}
+      {/* <LayoutNavigation></LayoutNavigation> */}
       {props.children}
     </>
   );
