@@ -84,7 +84,7 @@ export default function BoardCommentWrite(props): JSX.Element {
           boardCommentId: props.el._id,
         },
       });
-      props.setIsEdit(false);
+      props.setIsEdit?.(false);
     } catch (e) {
       if (e instanceof Error) alert(e.message);
     }
